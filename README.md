@@ -40,13 +40,9 @@ Test
 ----
 1. sbt clean test
 
-Server Run
-----------
-1. sbt server/run
-
-Client Run
-----------
-1. sbt client/run
+Run
+---
+1. sbt run
 
 Package Server
 --------------
