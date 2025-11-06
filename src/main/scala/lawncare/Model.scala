@@ -8,8 +8,6 @@ import scalafx.application.Platform
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
 
-import Fault.given
-
 final class Model(fetcher: Fetcher) extends LazyLogging:
   def assertInFxThread(message: String, suffix: String = " should be in fx thread!"): Unit =
     require(Platform.isFxApplicationThread, message + suffix)
@@ -43,43 +41,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     val cause = s"$source - $entity - $fault"
     logger.error("*** cause: {}", cause)
     observableFaults += fault.copy(cause = cause)
-
-  def add(fault: Fault): Unit =
-    supervised:
-      assertNotInFxThread(s"add fault: $fault")
-      fetcher.fetch(
-        AddFault(objectAccount.get.license, fault),
-        (event: Event) => event match
-          case fault @ Fault(cause, _) => onFetchFault("add fault", fault)
-          case FaultAdded(_) =>
-            observableFaults += fault
-            observableFaults.sort()
-          case _ => ()
-      )
-
-  def register(register: Register): Unit =
-    supervised:
-      assertNotInFxThread(s"register: $register")
-      fetcher.fetch(
-        register,
-        (event: Event) => event match
-          case _ @ Fault(_, _) => registered.set(false)
-          case Registered(account) => objectAccount.set(account)
-          case _ => ()
-      )
-
-  def login(login: Login): Unit =
-    supervised:
-      assertNotInFxThread(s"login: $login")
-      fetcher.fetch(
-        login,
-        (event: Event) => event match
-          case _ @ Fault(_, _) => loggedin.set(false)
-          case LoggedIn(account) =>
-            objectAccount.set(account)
-            properties()
-          case _ => ()
-      )
 
   def properties(): Unit =
     supervised:
