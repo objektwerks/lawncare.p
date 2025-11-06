@@ -7,7 +7,7 @@ create index if not exists property_location_idx ON property(location);
 
 create table if not exists session (
   id long primary key auto_increment,
-  property_id long REFERENCES property(id),
+  property_id long references property(id),
   mowed boolean NOT NULL,
   edged boolean NOT NULL,
   trimmed boolean NOT NULL,
@@ -24,7 +24,7 @@ create index if not exists session_occurred_idx ON session(occurred);
 
 create table if not exists issue (
   id long primary key auto_increment,
-  property_id long REFERENCES property(id),
+  property_id long references property(id),
   report varchar NOT NULL,
   resolution varchar NOT NULL,
   reported varchar NOT NULL,
