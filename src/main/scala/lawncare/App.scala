@@ -13,7 +13,7 @@ import lawncare.dialog.Alerts
 object App extends JFXApp3 with LazyLogging:
   val conf = ConfigFactory.load("app.conf")
   val context = Context(conf)
-  val store = Store(conf)
+  val store = Store(context)
   val model = Model(store)
 
   override def start(): Unit =
