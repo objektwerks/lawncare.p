@@ -6,6 +6,7 @@ libraryDependencies ++= {
   Seq(
     "org.scalafx" %% "scalafx" % "24.0.2-R36",
     "com.softwaremill.ox" %% "core" % "1.0.1",
+    "org.scalikejdbc" %% "scalikejdbc" % "4.3.5",
     "com.h2database" % "h2" % "2.4.240",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
     "ch.qos.logback" % "logback-classic" % "1.5.20",
