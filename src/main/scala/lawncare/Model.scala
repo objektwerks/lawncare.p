@@ -8,14 +8,11 @@ import scalafx.application.Platform
 import scalafx.collections.ObservableBuffer
 import scalafx.beans.property.ObjectProperty
 
-final class Model(fetcher: Fetcher) extends LazyLogging:
+final class Model(store: Store) extends LazyLogging:
   def assertInFxThread(message: String, suffix: String = " should be in fx thread!"): Unit =
     require(Platform.isFxApplicationThread, message + suffix)
   def assertNotInFxThread(message: String, suffix: String = " should not be in fx thread!"): Unit =
     require(!Platform.isFxApplicationThread, message + suffix)
-
-  val registered = ObjectProperty[Boolean](true)
-  val loggedin = ObjectProperty[Boolean](true)
 
   val selectedPropertyId = ObjectProperty[Long](0)
   val selectedSessionId = ObjectProperty[Long](0)
@@ -26,21 +23,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     issues(newPropertyId)
   }
 
-  val objectAccount = ObjectProperty[Account](Account.empty)
   val observableProperties = ObservableBuffer[Property]()
   val observableSessions = ObservableBuffer[Session]()
   val observableIssues = ObservableBuffer[Issue]()
-  val observableFaults = ObservableBuffer[Fault]()
-
-  def onFetchFault(source: String, fault: Fault): Unit =
-    val cause = s"$source - $fault"
-    logger.error("*** cause: {}", cause)
-    observableFaults += fault.copy(cause = cause)
-
-  def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
-    val cause = s"$source - $entity - $fault"
-    logger.error("*** cause: {}", cause)
-    observableFaults += fault.copy(cause = cause)
 
   def properties(): Unit =
     supervised:
