@@ -1,8 +1,5 @@
 package lawncare
 
-import com.github.plokhotnyuk.jsoniter_scala.core.*
-import com.github.plokhotnyuk.jsoniter_scala.macros.*
-
 import java.time.LocalDate
 import java.util.UUID
 
@@ -12,20 +9,8 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  given JsonValueCodec[Entity] = JsonCodecMaker.make[Entity](CodecMakerConfig.withDiscriminatorFieldName(None))
-
   def now: String = LocalDate.now.toString
   def localDate(now: String): LocalDate = if now.nonEmpty then LocalDate.parse(now) else LocalDate.now
-
-final case class Account(id: Long = 0,
-                         license: String = UUID.randomUUID.toString,
-                         email: String = "",
-                         pin: String = Pin.newInstance,
-                         activated: String = Entity.now) extends Entity derives CanEqual
-
-object Account:
-  val empty = Account(license = "", email = "", pin = "")
-  given JsonValueCodec[Account] = JsonCodecMaker.make[Account]
 
 final case class Property(id: Long = 0,
                           accountId: Long,
@@ -35,7 +20,6 @@ final case class Property(id: Long = 0,
   val property = this
 
 object Property:
-  given JsonValueCodec[Property] = JsonCodecMaker.make[Property]
   given Ordering[Property] = Ordering.by[Property, String](property => property.added).reverse
 
 final case class Session(id: Long = 0,
@@ -65,7 +49,6 @@ final case class Session(id: Long = 0,
   val session = this
 
 object Session:
-  given JsonValueCodec[Session] = JsonCodecMaker.make[Session]
   given Ordering[Session] = Ordering.by[Session, String](session => session.occurred).reverse
 
 final case class Issue(id: Long = 0,
@@ -81,5 +64,4 @@ final case class Issue(id: Long = 0,
   val issue = this
 
 object Issue:
-  given JsonValueCodec[Issue] = JsonCodecMaker.make[Issue]
   given Ordering[Issue] = Ordering.by[Issue, String](issue => issue.reported).reverse
