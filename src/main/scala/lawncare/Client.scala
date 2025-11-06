@@ -8,13 +8,13 @@ import java.awt.Taskbar.Feature
 
 import scalafx.application.JFXApp3
 
-import lawncare.dialog.{Alerts, RegisterLogin, RegisterLoginDialog}
+import lawncare.dialog.Alerts
 
 object Client extends JFXApp3 with LazyLogging:
   val conf = ConfigFactory.load("client.conf")
   val context = Context(conf)
-  val fetcher = Fetcher(context)
-  val model = Model(fetcher)
+  val store = Store(conf)
+  val model = Model(store)
 
   override def start(): Unit =
     val view = View(context, model)
@@ -30,27 +30,8 @@ object Client extends JFXApp3 with LazyLogging:
       if taskbar.isSupported(Feature.ICON_IMAGE) then
         val appIcon = Toolkit.getDefaultToolkit.getImage(this.getClass().getResource("/image/logo.png"))
         taskbar.setIconImage(appIcon)
-
-    stage.hide()
-
-    model.registered.onChange { (_, _, _) =>
-      Alerts.showRegisterAlert(context, stage)
-      logger.error("*** register failed, client stopping ...")
-      sys.exit(-1)
-    }
-
-    model.loggedin.onChange { (_, _, _) =>
-      Alerts.showLoginAlert(context, stage)
-      logger.error("*** login failed, client stopping ...")
-      sys.exit(-1)
-    }
-    
-    RegisterLoginDialog(stage, context).showAndWait() match
-      case Some( RegisterLogin( Some(register), None) ) => model.register(register)
-      case Some( RegisterLogin( None, Some(login) ) ) => model.login(login)
-      case _ =>
     
     stage.show()
-    logger.info("*** client started, server url: {} endpoint: {}", context.url, context.endpoint)
+    logger.info("*** Lawncare started at url: {}", context.url)
 
-  override def stopApp(): Unit = logger.info("*** client stopped.")
+  override def stopApp(): Unit = logger.info("*** Lawncare stopped.")
