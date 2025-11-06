@@ -57,7 +57,7 @@ copyAssemblyJar := {
 // End: Assembly Tasks
 
 // Begin: Assembly
-assemblyJarName := s"${name.value}-${version.value}.jar"
+assemblyJarName := s"lawncare-${version.value}.jar"
 assembly / assemblyMergeStrategy := {
   case PathList("META-INF", x, xs @ _*) if x.toLowerCase == "services" => MergeStrategy.filterDistinctLines
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard
