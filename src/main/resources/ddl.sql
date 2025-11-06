@@ -6,7 +6,7 @@ create table if not exists property (
 
 create table if not exists session (
   id long primary key auto_increment,
-  property_id BIGINT REFERENCES property(id),
+  property_id long REFERENCES property(id),
   mowed BOOLEAN NOT NULL,
   edged BOOLEAN NOT NULL,
   trimmed BOOLEAN NOT NULL,
@@ -22,7 +22,7 @@ create table if not exists session (
 
 create table if not exists issue (
   id long primary key auto_increment,
-  property_id BIGINT REFERENCES property(id),
+  property_id long REFERENCES property(id),
   report varchar NOT NULL,
   resolution varchar NOT NULL,
   reported varchar NOT NULL,
