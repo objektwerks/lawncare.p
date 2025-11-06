@@ -1,10 +1,10 @@
-CREATE TABLE property (
+create table if not exists property (
   id BIGSERIAL PRIMARY KEY,
   location VARCHAR NOT NULL,
   added VARCHAR(10) NOT NULL
 );
 
-CREATE TABLE session (
+create table if not exists session (
   id BIGSERIAL PRIMARY KEY,
   property_id BIGINT REFERENCES property(id),
   mowed BOOLEAN NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE session (
   occurred VARCHAR NOT NULL
 );
 
-CREATE TABLE issue (
+create table if not exists issue (
   id BIGSERIAL PRIMARY KEY,
   property_id BIGINT REFERENCES property(id),
   report VARCHAR NOT NULL,
