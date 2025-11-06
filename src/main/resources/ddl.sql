@@ -30,4 +30,5 @@ create table if not exists issue (
   reported varchar NOT NULL,
   resolved varchar NOT NULL
 );
+create index if not exists issue_reported_idx ON issue(reported);
 create index if not exists issue_resolved_idx ON issue(resolved);
