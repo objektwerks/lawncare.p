@@ -32,6 +32,6 @@ object App extends JFXApp3 with LazyLogging:
         taskbar.setIconImage(appIcon)
     
     stage.show()
-    logger.info("*** Lawncare started at url: {}", context.url)
+    logger.info("*** Lawncare started!")
 
   override def stopApp(): Unit = logger.info("*** Lawncare stopped.")
