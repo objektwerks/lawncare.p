@@ -3,19 +3,20 @@ create table if not exists property (
   location varchar NOT NULL,
   added varchar(10) NOT NULL
 );
+create index if not exists property_location_idx ON property(location);
 
 create table if not exists session (
   id long primary key auto_increment,
   property_id long REFERENCES property(id),
-  mowed BOOLEAN NOT NULL,
-  edged BOOLEAN NOT NULL,
-  trimmed BOOLEAN NOT NULL,
-  blowed BOOLEAN NOT NULL,
-  fertilized BOOLEAN NOT NULL,
-  pesticided BOOLEAN NOT NULL,
-  weeded BOOLEAN NOT NULL,
-  watered BOOLEAN NOT NULL,
-  repaired BOOLEAN NOT NULL,
+  mowed boolean NOT NULL,
+  edged boolean NOT NULL,
+  trimmed boolean NOT NULL,
+  blowed boolean NOT NULL,
+  fertilized boolean NOT NULL,
+  pesticided boolean NOT NULL,
+  weeded boolean NOT NULL,
+  watered boolean NOT NULL,
+  repaired boolean NOT NULL,
   note varchar NOT NULL,
   occurred varchar NOT NULL
 );
