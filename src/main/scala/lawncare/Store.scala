@@ -40,7 +40,6 @@ final class Store(cache: Cache[String, String],
         .map(rs =>
           Property(
             rs.long("id"),
-            rs.long("account_id"),
             rs.string("location"), 
             rs.string("added")
           )
@@ -51,7 +50,7 @@ final class Store(cache: Cache[String, String],
   def addProperty(property: Property): Long =
     DB localTx { implicit session =>
       sql"""
-        insert into property(account_id, location, added) values(${property.accountId}, ${property.location}, ${property.added})
+        insert into property(account_id, location, added) values(${property.location}, ${property.added})
         """
         .updateAndReturnGeneratedKey()
     }
