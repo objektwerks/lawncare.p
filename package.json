@@ -1,23 +1,23 @@
 {
     "bin": {
-        "homeschooler": "jdeploy-bundle/jdeploy.js"
+        "lawncare": "jdeploy-bundle/jdeploy.js"
     },
     "author": "Objektwerks",
-    "description": "Homeschool app.",
+    "description": "Lawncare app.",
     "main": "index.js",
     "preferGlobal": true,
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/objektwerks/homeschooler.git"
+        "url": "git+https://github.com/objektwerks/lawncare.p.git"
     },
     "version": "16.0.0",
     "jdeploy": {
         "jdk": false,
-        "javaVersion": "24",
-        "jar": ".assembly/homeschooler-16.0.0.jar",
+        "javaVersion": "25",
+        "jar": ".assembly/lawncare-1.0.0.jar",
         "javafx": true,
-        "javafxVersion": "24.0.1",
-        "title": "Homeschooler"
+        "javafxVersion": "25",
+        "title": "Lawncare"
     },
     "dependencies": {
         "command-exists-promise": "^2.0.2",
@@ -27,12 +27,12 @@
         "shelljs": "^0.8.5"
     },
     "license": "Apache 2.0",
-    "name": "homeschooler",
+    "name": "lawncare",
     "files": [
         "jdeploy-bundle"
     ],
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "homepage": "https://github.com/objektwerks/homeschooler"
+    "homepage": "https://github.com/objektwerks/lawncare.p"
 }
