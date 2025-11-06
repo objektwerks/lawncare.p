@@ -5,11 +5,10 @@ import scalafx.scene.control.{ButtonType, CheckBox, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
-import lawncare.{Client, Context, Session}
+import lawncare.{App, Context, Session}
 
-final class SessionDialog(context: Context,
-                          session: Session) extends Dialog[Session]:
-  initOwner(Client.stage)
+final class SessionDialog(context: Context, session: Session) extends Dialog[Session]:
+  initOwner(App.stage)
   title = context.windowTitle
   headerText = context.dialogSession
 
