@@ -52,64 +52,6 @@ Execute
 -------
 1. java -jar .assembly/lawncare-$version.jar ( or double-click executable jar )
 
-Postgresql
-----------
-1. config:
-    1. on osx intel: /usr/local/var/postgres/postgresql.config : listen_addresses = ‘localhost’, port = 5432
-    2. on osx m1: /opt/homebrew/var/postgres/postgresql.config : listen_addresses = ‘localhost’, port = 5432
-2. run:
-    1. brew services start postgresql@14
-3. logs:
-    1. on osx intel: /usr/local/var/log/postgres.log
-    2. on m1: /opt/homebrew/var/log/postgres.log
-
-Database
---------
->Example database url: postgresql://localhost:5432/lawncare?user=mycomputername&password=lawncare"
-1. psql postgres
-2. CREATE DATABASE lawncare OWNER [your computer name];
-3. GRANT ALL PRIVILEGES ON DATABASE lawncare TO [your computer name];
-4. \l
-5. \q
-6. psql lawncare
-7. \i ddl.sql
-8. \q
-
-DDL
----
->Alternatively run: psql -d lawncare -f ddl.sql
-1. psql lawncare
-2. \i ddl.sql
-3. \q
-
-Drop
-----
-1. psql postgres
-2. drop database lawncare;
-3. \q
-
-Environment
------------
->The following environment variables must be defined:
-```
-export LAWNCARE_HOST="127.0.0.1"
-export LAWNCARE_PORT=7070
-export LAWNCARE_ENDPOINT="/command"
-
-export LAWNCARE_CACHE_INITIAL_SIZE=4
-export LAWNCARE_CACHE_MAX_SIZE=10
-export LAWNCARE_CACHE_EXPIRE_AFTER=24
-
-export LAWNCARE_POSTGRESQL_DRIVER="org.postgresql.ds.PGSimpleDataSource"
-export LAWNCARE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/lawncare"
-export LAWNCARE_POSTGRESQL_USER="yourusername"
-export LAWNCARE_POSTGRESQL_PASSWORD="lawncare"
-
-export LAWNCARE_EMAIL_HOST="your-email.provider.com"
-export LAWNCARE_EMAIL_ADDRESS="your-email@provider.com"
-export LAWNCARE_EMAIL_PASSWORD="your-email-password"
-```
-
 Resources
 ---------
 * [JavaFX](https://openjfx.io/index.html)
@@ -119,7 +61,7 @@ Resources
 
 License
 -------
->Copyright (c) [2024 - 2025] [Objektwerks]
+>Copyright (c) [2025] [Objektwerks]
 
 >Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
