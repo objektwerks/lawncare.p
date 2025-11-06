@@ -6,10 +6,9 @@ import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, 
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import lawncare.{Context, Model, Property}
-import lawncare.dialog.{AccountDialog, FaultsDialog, PropertyDialog}
+import lawncare.dialog.PropertyDialog
 
-final class PropertiesPane(context: Context,
-                           model: Model) extends VBox:
+final class PropertiesPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
 
@@ -34,21 +33,9 @@ final class PropertiesPane(context: Context,
     disable = true
     onAction = { _ => update() }
 
-  val accountButton = new Button:
-    graphic = context.accountImage
-    text = context.buttonAccount
-    disable = false
-    onAction = { _ => account() }
-
-  val faultsButton = new Button:
-    graphic = context.faultsImage
-    text = context.buttonFaults
-    disable = true
-    onAction = { _ => faults() }
-
   val buttonBar = new HBox:
     spacing = 6
-    children = List(addButton, editButton, accountButton, faultsButton)
+    children = List(addButton, editButton)
 
   val tab = new Tab:
   	text = context.tabProperties
@@ -65,10 +52,6 @@ final class PropertiesPane(context: Context,
   children = List(tabPane)
   VBox.setVgrow(tableView, Priority.Always)
   VBox.setVgrow(tabPane, Priority.Always)
-
-  model.observableFaults.onChange { (_, _) =>
-    faultsButton.disable = false
-  }
 
   tableView.onMouseClicked = { event =>
     if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
@@ -100,8 +83,3 @@ final class PropertiesPane(context: Context,
           tableView.selectionModel().select(selectedIndex)
         }
         case _ =>
-
-  def account(): Unit = AccountDialog(context, model.objectAccount.get).showAndWait()
-
-  def faults(): Unit = FaultsDialog(context, model).showAndWait() match
-    case _ => faultsButton.disable = model.observableFaults.isEmpty
