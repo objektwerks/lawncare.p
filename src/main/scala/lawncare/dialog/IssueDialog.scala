@@ -5,11 +5,11 @@ import scalafx.scene.control.{ButtonType, DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
-import lawncare.{Client, Context, Entity, Issue}
+import lawncare.{App, Context, Entity, Issue}
 
 final class IssueDialog(context: Context,
                         issue: Issue) extends Dialog[Issue]:
-  initOwner(Client.stage)
+  initOwner(App.stage)
   title = context.windowTitle
   headerText = context.dialogSession
 
