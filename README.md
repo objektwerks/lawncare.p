@@ -44,17 +44,12 @@ Run
 ---
 1. sbt run
 
-Package Server
---------------
-1. sbt server/universal:packageBin
-2. see server/target/universal
-
-Client Assembly
----------------
+Assembly
+--------
 1. sbt clean test assembly copyAssemblyJar
 
-Execute Client
---------------
+Execute
+-------
 1. java -jar .assembly/lawncare-$version.jar ( or double-click executable jar )
 
 Postgresql
