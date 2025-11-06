@@ -13,7 +13,6 @@ object Entity:
   def localDate(now: String): LocalDate = if now.nonEmpty then LocalDate.parse(now) else LocalDate.now
 
 final case class Property(id: Long = 0,
-                          accountId: Long,
                           location: String,
                           added: String = Entity.now) extends Entity derives CanEqual:
   val locationProperty = ObjectProperty[String](this, "location", location)
