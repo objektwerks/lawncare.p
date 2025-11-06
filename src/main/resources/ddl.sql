@@ -1,11 +1,11 @@
 create table if not exists property (
-  id BIGSERIAL PRIMARY KEY,
+  id long primary key auto_increment,
   location VARCHAR NOT NULL,
   added VARCHAR(10) NOT NULL
 );
 
 create table if not exists session (
-  id BIGSERIAL PRIMARY KEY,
+  id long primary key auto_increment,
   property_id BIGINT REFERENCES property(id),
   mowed BOOLEAN NOT NULL,
   edged BOOLEAN NOT NULL,
@@ -21,7 +21,7 @@ create table if not exists session (
 );
 
 create table if not exists issue (
-  id BIGSERIAL PRIMARY KEY,
+  id long primary key auto_increment,
   property_id BIGINT REFERENCES property(id),
   report VARCHAR NOT NULL,
   resolution VARCHAR NOT NULL,
