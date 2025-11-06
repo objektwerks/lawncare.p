@@ -31,6 +31,8 @@ object App extends JFXApp3 with LazyLogging:
         val appIcon = Toolkit.getDefaultToolkit.getImage(this.getClass().getResource("/image/logo.png"))
         taskbar.setIconImage(appIcon)
     
+    model.properties()
+    
     stage.show()
     logger.info("*** Lawncare started!")
 
