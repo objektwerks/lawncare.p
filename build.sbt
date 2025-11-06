@@ -8,7 +8,6 @@ libraryDependencies ++= {
     "com.softwaremill.ox" %% "core" % "1.0.1",
     "org.scalikejdbc" %% "scalikejdbc" % "4.3.5",
     "com.zaxxer" % "HikariCP" % "7.0.2",
-    "com.github.blemale" %% "scaffeine" % "5.2.1",
     "com.h2database" % "h2" % "2.4.240",
     "com.typesafe" % "config" % "1.4.3",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",

@@ -1,6 +1,5 @@
 package lawncare
 
-import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 import com.zaxxer.hikari.HikariDataSource
@@ -12,27 +11,17 @@ import scala.concurrent.duration.FiniteDuration
 
 import scalikejdbc.*
 
-object Store:
-  def apply(config: Config) = new Store( cache(config), dataSource(config) )
-
-  def cache(config: Config): Cache[String, String] =
-    Scaffeine()
-      .initialCapacity(config.getInt("cache.initialSize"))
-      .maximumSize(config.getInt("cache.maxSize"))
-      .expireAfterWrite( FiniteDuration( config.getLong("cache.expireAfter"), TimeUnit.HOURS) )
-      .build[String, String]()
-
-  def dataSource(config: Config): DataSource =
-    val ds = HikariDataSource()
-    ds.setDataSourceClassName(config.getString("db.driver"))
-    ds.addDataSourceProperty("url", config.getString("db.url"))
-    ds.addDataSourceProperty("user", config.getString("db.user"))
-    ds.addDataSourceProperty("password", config.getString("db.password"))
+final class Store(context: Context):
+  private val dataSource: DataSource =
+    val ds = new HikariDataSource()
+    ds.setDataSourceClassName(context.dataSourceClassName)
+    ds.addDataSourceProperty("url", context.url)
+    ds.addDataSourceProperty("user", context.user)
+    ds.addDataSourceProperty("password", context.password)
+    ds.setMaximumPoolSize(context.maximumPoolSize)
     ds
 
-final class Store(cache: Cache[String, String],
-                  dataSource: DataSource) extends LazyLogging:
-  ConnectionPool.singleton(new DataSourceConnectionPool(dataSource))
+  ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
 
   def listProperties(accountId: Long): List[Property] =
     DB readOnly { implicit session =>
