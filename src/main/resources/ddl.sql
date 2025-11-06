@@ -1,7 +1,7 @@
 create table if not exists property (
   id long primary key auto_increment,
-  location VARCHAR NOT NULL,
-  added VARCHAR(10) NOT NULL
+  location varchar NOT NULL,
+  added varchar(10) NOT NULL
 );
 
 create table if not exists session (
@@ -16,15 +16,15 @@ create table if not exists session (
   weeded BOOLEAN NOT NULL,
   watered BOOLEAN NOT NULL,
   repaired BOOLEAN NOT NULL,
-  note VARCHAR NOT NULL,
-  occurred VARCHAR NOT NULL
+  note varchar NOT NULL,
+  occurred varchar NOT NULL
 );
 
 create table if not exists issue (
   id long primary key auto_increment,
   property_id BIGINT REFERENCES property(id),
-  report VARCHAR NOT NULL,
-  resolution VARCHAR NOT NULL,
-  reported VARCHAR NOT NULL,
-  resolved VARCHAR NOT NULL
+  report varchar NOT NULL,
+  resolution varchar NOT NULL,
+  reported varchar NOT NULL,
+  resolved varchar NOT NULL
 );
