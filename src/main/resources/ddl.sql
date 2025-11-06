@@ -20,6 +20,7 @@ create table if not exists session (
   note varchar NOT NULL,
   occurred varchar NOT NULL
 );
+create index if not exists session_occurred_idx ON session(occurred);
 
 create table if not exists issue (
   id long primary key auto_increment,
