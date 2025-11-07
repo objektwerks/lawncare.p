@@ -31,7 +31,7 @@ final class Context(config: Config):
 
   val dialogProperty = config.getString("dialog.property")
   val dialogSession = config.getString("dialog.session")
-  val dialogFaults = config.getString("dialog.faults")
+  val dialogIssue = config.getString("dialog.issue")
 
   val errorServer = config.getString("error.server")
   val errorRegister = config.getString("error.register")
