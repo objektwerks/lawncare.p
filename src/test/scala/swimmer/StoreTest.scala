@@ -48,3 +48,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
 
   def addIssue(): Unit =
     store.addIssue(issue)
+
+  def updateIssue(): Unit =
+    issue = issue.copy(resolved = Entity.now)
+    store.updateIssue(issue)
