@@ -23,9 +23,9 @@ final class Store(context: Context):
 
   ConnectionPool.singleton(DataSourceConnectionPool(dataSource))
 
-  def listProperties(accountId: Long): List[Property] =
+  def listProperties(): List[Property] =
     DB readOnly { implicit session =>
-      sql"select * from property where account_id = $accountId order by added"
+      sql"select * from property order by location"
         .map(rs =>
           Property(
             rs.long("id"),
