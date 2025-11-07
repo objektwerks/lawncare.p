@@ -69,9 +69,9 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
 
   def add(): Unit =
     PropertyDialog(context, Property(location = "")).showAndWait() match
-      case Some(property: Property) => model.add(property) {
-        tableView.selectionModel().select(property.copy(id = model.selectedPropertyId.value))
-      }
+      case Some(property: Property) =>
+        model.add(property)
+        tableView.selectionModel().select(0)
       case _ =>
 
   def update(): Unit =
@@ -79,7 +79,7 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
       val selectedIndex = tableView.selectionModel().getSelectedIndex
       val property = tableView.selectionModel().getSelectedItem.property
       PropertyDialog(context, property).showAndWait() match
-        case Some(property: Property) => model.update(selectedIndex, property) {
+        case Some(property: Property) =>
+          model.update(selectedIndex, property)
           tableView.selectionModel().select(selectedIndex)
-        }
         case _ =>

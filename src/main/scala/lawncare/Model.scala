@@ -44,22 +44,15 @@ final class Model(store: Store) extends LazyLogging:
       selectedPropertyId.set(id)
       logger.info(s"Added property: $property")
 
-  def update(selectedIndex: Int, property: Property)(runLast: => Unit): Unit =
+  def update(selectedIndex: Int, property: Property): Unit =
     supervised:
       assertNotInFxThread(s"update property from: $selectedIndex to: $property")
-      fetcher.fetch(
-        SaveProperty(objectAccount.get.license, property),
-        (event: Event) => event match
-          case fault @ Fault(_, _) => onFetchFault("update property", property, fault)
-          case PropertySaved(id) =>
-            if selectedIndex > -1 then
-              observableProperties.update(selectedIndex, property)
-              logger.info(s"Updated property from: $selectedIndex to: $property")
-              runLast
-            else
-              logger.error(s"Update of property: $property \nfailed due to invalid index: $selectedIndex")
-          case _ => ()
-      )
+      store.updateProperty(property)
+      if selectedIndex > -1 then
+        observableProperties.update(selectedIndex, property)
+        logger.info(s"Updated property from: $selectedIndex to: $property")
+      else
+        logger.error(s"Update of property: $property \nfailed due to invalid index: $selectedIndex")
 
   def sessions(propertyId: Long): Unit =
     supervised:
