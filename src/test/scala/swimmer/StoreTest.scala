@@ -9,7 +9,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
   val context = Context( ConfigFactory.load("test.conf") )
   val store = Store(context)
 
-  var property = Property(location = "fred")
+  var property = Property(location = "100 Coral Lane")
   var session = Session(propertyId = 0)
   var issue = Issue(propertyId = 0)
 
@@ -34,7 +34,7 @@ final class StoreTest extends AnyFunSuite with Matchers:
     issue = issue.copy(propertyId = id)
 
   def updateProperty(): Unit =
-    property = property.copy(location = "fred flintstone")
+    property = property.copy(location = "100 Coral Drive")
     store.updateProperty(property)
 
   def listProperties(): Unit =
