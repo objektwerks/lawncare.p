@@ -27,6 +27,8 @@ final class Model(store: Store) extends LazyLogging:
   val observableSessions = ObservableBuffer[Session]()
   val observableIssues = ObservableBuffer[Issue]()
 
+  logger.info("Model initialized.")
+
   def properties(): Unit =
     supervised:
       assertNotInFxThread("list properties")
