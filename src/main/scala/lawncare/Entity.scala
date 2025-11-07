@@ -1,7 +1,6 @@
 package lawncare
 
 import java.time.LocalDate
-import java.util.UUID
 
 import scalafx.beans.property.ObjectProperty
 
