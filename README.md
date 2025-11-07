@@ -4,10 +4,8 @@ Lawn care app using ScalaFx, ScalikeJdbc, Ox, H2, HikariCP and Scala 3.
 
 Model
 -----
-* Account 1 --> * Property
 * Property 1 --> * Session
 * Property 1 --> * Issue
-* Fault
 
 Session
 -------
