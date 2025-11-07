@@ -90,13 +90,14 @@ final class IssuesPane(context: Context,
       case Some(issue: Issue) =>
         model.add(issue)
         tableView.selectionModel().select(0)
+      case _ =>
 
   def update(): Unit =
     if tableView.selectionModel().getSelectedItem != null then
       val selectedIndex = tableView.selectionModel().getSelectedIndex
       val issue = tableView.selectionModel().getSelectedItem.issue
       IssueDialog(context, issue).showAndWait() match
-        case Some(issue: Issue) => model.update(selectedIndex, issue) {
+        case Some(updatedIssue: Issue) =>
+          model.update(selectedIndex, updatedIssue)
           tableView.selectionModel().select(selectedIndex)
-        }
         case _ =>
