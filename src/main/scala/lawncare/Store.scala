@@ -116,14 +116,13 @@ final class Store(context: Context):
         .updateAndReturnGeneratedKey()
     }
 
-  def updateIssue(issue: Issue): Long =
+  def updateIssue(issue: Issue): Unit =
     DB localTx { implicit session =>
       sql"""
         update issue set report = ${issue.report}, resolution = ${issue.resolution}, reported = ${issue.reported},
         resolved = ${issue.resolved} where id = ${issue.id}
         """
         .update()
-      issue.id
     }
 
   def isIssueResolved(issue: Issue): Boolean =
