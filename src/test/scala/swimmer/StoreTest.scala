@@ -52,3 +52,6 @@ final class StoreTest extends AnyFunSuite with Matchers:
   def updateIssue(): Unit =
     issue = issue.copy(resolved = Entity.now)
     store.updateIssue(issue)
+
+  def listIssues(): Unit =
+    store.listIssues(property.id).length shouldBe 1
