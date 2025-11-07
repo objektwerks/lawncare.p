@@ -40,7 +40,6 @@ final class Model(store: Store) extends LazyLogging:
       assertNotInFxThread(s"add property: $property")
       val id = store.addProperty(property)
       observableProperties.insert(0, property.copy(id = id))
-      observableProperties.sort()
       selectedPropertyId.set(id)
       logger.info(s"Added property: $property")
 
@@ -65,26 +64,18 @@ final class Model(store: Store) extends LazyLogging:
       assertNotInFxThread(s"add session: $session")
       val id = store.addSession(session)
       observableSessions.insert(0, session.copy(id = id))
-      observableSessions.sort()
       selectedSessionId.set(id)
       logger.info(s"Added session: $session")
 
-  def update(selectedIndex: Int, session: Session)(runLast: => Unit): Unit =
+  def update(selectedIndex: Int, session: Session): Unit =
     supervised:
       assertNotInFxThread(s"update session from: $selectedIndex to: $session")
-      fetcher.fetch(
-        SaveSession(objectAccount.get.license, session),
-        (event: Event) => event match
-          case fault @ Fault(_, _) => onFetchFault("update session", session, fault)
-          case SessionSaved(id) =>
-            if selectedIndex > -1 then
-              observableSessions.update(selectedIndex, session)      
-              logger.info(s"Updated session from: $selectedIndex to: $session")
-              runLast
-            else
-              logger.error(s"Update of session: $session \nfailed due to invalid index: $selectedIndex")
-          case _ => ()
-      )
+      store.updateSession(session)
+      if selectedIndex > -1 then
+        observableSessions.update(selectedIndex, session)      
+        logger.info(s"Updated session from: $selectedIndex to: $session")
+      else
+        logger.error(s"Update of session: $session \nfailed due to invalid index: $selectedIndex")
 
   def issues(propertyId: Long): Unit =
     supervised:
