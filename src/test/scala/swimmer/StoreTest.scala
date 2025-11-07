@@ -22,6 +22,10 @@ final class StoreTest extends AnyFunSuite with Matchers:
     updateSession()
     listSessions()
 
+    addIssue()
+    updateIssue()
+    listIssues()
+
   def addProperty(): Unit =
     val id = store.addProperty(property)
     id shouldBe 1
