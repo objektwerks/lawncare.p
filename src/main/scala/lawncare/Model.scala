@@ -73,7 +73,7 @@ final class Model(store: Store) extends LazyLogging:
       store.updateSession(session)
       if selectedIndex > -1 then
         observableSessions.update(selectedIndex, session)      
-        logger.info(s"Updated session from: $selectedIndex to: $session")
+        logger.info(s"Updated session: $session")
       else
         logger.error(s"Update of session: $session \nfailed due to invalid index: $selectedIndex")
 
