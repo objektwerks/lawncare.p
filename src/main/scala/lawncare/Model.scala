@@ -91,19 +91,12 @@ final class Model(store: Store) extends LazyLogging:
       selectedIssueId.set(id)
       logger.info(s"Added issue: $issue")
 
-  def update(selectedIndex: Int, issue: Issue)(runLast: => Unit): Unit =
+  def update(selectedIndex: Int, issue: Issue): Unit =
     supervised:
       assertNotInFxThread(s"update issue from: $selectedIndex to: $issue")
-      fetcher.fetch(
-        SaveIssue(objectAccount.get.license, issue),
-        (event: Event) => event match
-          case fault @ Fault(_, _) => onFetchFault("update issue", issue, fault)
-          case IssueSaved(id) =>
-            if selectedIndex > -1 then
-              observableIssues.update(selectedIndex, issue)      
-              logger.info(s"Updated issue from: $selectedIndex to: $issue")
-              runLast
-            else
-              logger.error(s"Update of issue: $issue \nfailed due to invalid index: $selectedIndex")
-          case _ => ()
-      )
+      store.updateIssue(issue)
+      if selectedIndex > -1 then
+        observableIssues.update(selectedIndex, issue)      
+        logger.info(s"Updated issue from: $selectedIndex to: $issue")
+      else
+        logger.error(s"Update of issue: $issue \nfailed due to invalid index: $selectedIndex")
