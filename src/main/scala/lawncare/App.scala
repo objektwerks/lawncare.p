@@ -8,8 +8,6 @@ import java.awt.Taskbar.Feature
 
 import scalafx.application.JFXApp3
 
-import lawncare.dialog.Alerts
-
 object App extends JFXApp3 with LazyLogging:
   val conf = ConfigFactory.load("app.conf")
   val context = Context(conf)
