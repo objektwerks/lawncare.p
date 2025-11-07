@@ -19,7 +19,7 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
         cellValueFactory = _.value.locationProperty
     )
     items = model.observableProperties
-  tableView.columnResizePolicy = TableView.ConstrainedResizePolicy
+  tableView.columnResizePolicy = TableView.ConstrainedResizePolicyFlexLastColumn
 
   val addButton = new Button:
     graphic = context.addImage
