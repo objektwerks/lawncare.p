@@ -52,6 +52,18 @@ Execute
 -------
 1. ```java -jar .assembly/lawncare-$version.jar```
 
+Deploy
+------
+1. edit build.sbt ( version )
+2. edit app.conf ( about > alert > contentText )
+3. edit package.json ( version + jdeploy / jar )
+4. sbt clean test assembly copyAssemblyJar
+5. perform github release ( from https://github.com/objektwerks/lawncare.p )
+6. npm login
+7. jdeploy publish ( to https://www.jdeploy.com/~lawncare )
+8. check email for npm message
+>See [jDeploy Docs](https://www.jdeploy.com/docs/manual/#_getting_started) for details.
+
 Resources
 ---------
 * [JavaFX](https://openjfx.io/index.html)
