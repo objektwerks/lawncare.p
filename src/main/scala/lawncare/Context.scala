@@ -29,8 +29,6 @@ final class Context(config: Config):
   val columnYes = config.getString("column.yes")
   val columnNo = config.getString("column.no")
 
-  val dialogRegisterLogin = config.getString("dialog.registerLogin")
-  val dialogAccount = config.getString("dialog.account")
   val dialogProperty = config.getString("dialog.property")
   val dialogSession = config.getString("dialog.session")
   val dialogFaults = config.getString("dialog.faults")
