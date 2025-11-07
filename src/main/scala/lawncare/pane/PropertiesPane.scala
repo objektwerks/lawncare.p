@@ -79,7 +79,7 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
       val selectedIndex = tableView.selectionModel().getSelectedIndex
       val property = tableView.selectionModel().getSelectedItem.property
       PropertyDialog(context, property).showAndWait() match
-        case Some(property: Property) =>
-          model.update(selectedIndex, property)
+        case Some(updateProperty: Property) =>
+          model.update(selectedIndex, updateProperty)
           tableView.selectionModel().select(selectedIndex)
         case _ =>
