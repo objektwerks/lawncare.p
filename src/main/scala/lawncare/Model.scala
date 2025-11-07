@@ -35,21 +35,14 @@ final class Model(store: Store) extends LazyLogging:
       observableProperties.clear()
       observableProperties ++= store.listProperties()
 
-  def add(property: Property)(runLast: => Unit): Unit =
+  def add(property: Property): Unit =
     supervised:
       assertNotInFxThread(s"add property: $property")
-      fetcher.fetch(
-        SaveProperty(objectAccount.get.license, property),
-        (event: Event) => event match
-          case fault @ Fault(_, _) => onFetchFault("add property", property, fault)
-          case PropertySaved(id) =>
-            observableProperties.insert(0, property.copy(id = id))
-            observableProperties.sort()
-            selectedPropertyId.set(id)
-            logger.info(s"Added property: $property")
-            runLast
-          case _ => ()
-      )
+      val id = store.addProperty(property)
+      observableProperties.insert(0, property.copy(id = id))
+      observableProperties.sort()
+      selectedPropertyId.set(id)
+      logger.info(s"Added property: $property")
 
   def update(selectedIndex: Int, property: Property)(runLast: => Unit): Unit =
     supervised:
