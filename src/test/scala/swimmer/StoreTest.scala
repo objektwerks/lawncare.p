@@ -45,3 +45,6 @@ final class StoreTest extends AnyFunSuite with Matchers:
 
   def listSessions(): Unit =
     store.listSessions(property.id).length shouldBe 1
+
+  def addIssue(): Unit =
+    store.addIssue(issue)
