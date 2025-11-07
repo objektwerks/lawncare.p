@@ -39,14 +39,13 @@ final class Store(context: Context):
         .updateAndReturnGeneratedKey()
     }
 
-  def updateProperty(property: Property): Long =
+  def updateProperty(property: Property): Unit =
     DB localTx { implicit session =>
       sql"""
         update property set location = ${property.location}
         where id = ${property.id}
         """
         .update()
-      property.id
     }
 
   def listSessions(propertyId: Long): List[Session] =
