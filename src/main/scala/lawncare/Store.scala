@@ -124,13 +124,3 @@ final class Store(context: Context):
         """
         .update()
     }
-
-  def isIssueResolved(issue: Issue): Boolean =
-    DB localTx { implicit session =>
-      sql"""
-        select resolved from issue where id = ${issue.id}
-        """
-        .map(rs => rs.string("resolved"))
-        .single()
-        .fold(false)(resolved => resolved != issue.resolved)
-    }
