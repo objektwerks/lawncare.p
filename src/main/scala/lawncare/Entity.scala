@@ -19,7 +19,7 @@ final case class Property(id: Long = 0,
   val property = this
 
 object Property:
-  given Ordering[Property] = Ordering.by[Property, String](property => property.added).reverse
+  given Ordering[Property] = Ordering.by[Property, String](property => property.location)
 
 final case class Session(id: Long = 0,
                          propertyId: Long,
