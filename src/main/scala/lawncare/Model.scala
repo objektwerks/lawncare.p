@@ -57,15 +57,8 @@ final class Model(store: Store) extends LazyLogging:
   def sessions(propertyId: Long): Unit =
     supervised:
       assertNotInFxThread(s"list sessions, property id: $propertyId")
-      fetcher.fetch(
-        ListSessions(objectAccount.get.license, propertyId),
-        (event: Event) => event match
-          case fault @ Fault(_, _) => onFetchFault("sessions", fault)
-          case SessionsListed(sessions) =>
-            observableSessions.clear()
-            observableSessions ++= sessions
-          case _ => ()
-      )
+      observableSessions.clear()
+      observableSessions ++= store.listSessions(propertyId)
 
   def add(session: Session)(runLast: => Unit): Unit =
     supervised:
