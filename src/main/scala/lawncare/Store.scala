@@ -1,13 +1,8 @@
 package lawncare
 
-import com.typesafe.config.Config
-import com.typesafe.scalalogging.LazyLogging
 import com.zaxxer.hikari.HikariDataSource
 
-import java.util.concurrent.TimeUnit
 import javax.sql.DataSource
-
-import scala.concurrent.duration.FiniteDuration
 
 import scalikejdbc.*
 
