@@ -23,10 +23,11 @@ final class StoreTest extends AnyFunSuite with Matchers:
     listSessions()
 
   def addProperty(): Unit =
-    val propertyId = store.addProperty(property)
-    propertyId shouldBe 1
-    property = property.copy(id = propertyId)
-    session = session.copy(propertyId = propertyId)
+    val id = store.addProperty(property)
+    id shouldBe 1
+    property = property.copy(id = id)
+    session = session.copy(propertyId = id)
+    issue = issue.copy(propertyId = id)
 
   def updateProperty(): Unit =
     property = property.copy(location = "fred flintstone")
