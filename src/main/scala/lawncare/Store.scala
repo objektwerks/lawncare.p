@@ -81,7 +81,7 @@ final class Store(context: Context):
         .updateAndReturnGeneratedKey()
     }
 
-  def updateSession(sess: Session): Long =
+  def updateSession(sess: Session): Unit =
     DB localTx { implicit session =>
       sql"""
         update session set mowed = ${sess.mowed}, edged = ${sess.edged}, trimmed = ${sess.trimmed}, blowed = ${sess.blowed},
@@ -89,7 +89,6 @@ final class Store(context: Context):
         repaired = ${sess.repaired}, note = ${sess.note}, occurred = ${sess.occurred} where id = ${sess.id}
         """
         .update()
-      sess.id
     }
 
   def listIssues(propertyId: Long): List[Issue] =
