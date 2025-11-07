@@ -78,6 +78,10 @@ NPM Versioning
 --------------
 >The ```build.sbt``` **must** contain a ```semver 3-digit``` **version** number. See: [Npmjs Semver](https://docs.npmjs.com/about-semantic-versioning)
 
+NPM Registry
+------------
+>Lawncare is deployed to: https://www.npmjs.com/package/lawncare
+
 Resources
 ---------
 * [JavaFX](https://openjfx.io/index.html)
