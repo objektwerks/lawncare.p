@@ -135,7 +135,7 @@ final class SessionsPane(context: Context,
       val selectedIndex = tableView.selectionModel().getSelectedIndex
       val session = tableView.selectionModel().getSelectedItem.session
       SessionDialog(context, session).showAndWait() match
-        case Some(session: Session) =>
-          model.update(selectedIndex, session)
+        case Some(updatedSession: Session) =>
+          model.update(selectedIndex, updatedSession)
           tableView.selectionModel().select(selectedIndex)
         case _ =>
