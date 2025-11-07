@@ -60,21 +60,14 @@ final class Model(store: Store) extends LazyLogging:
       observableSessions.clear()
       observableSessions ++= store.listSessions(propertyId)
 
-  def add(session: Session)(runLast: => Unit): Unit =
+  def add(session: Session): Unit =
     supervised:
       assertNotInFxThread(s"add session: $session")
-      fetcher.fetch(
-        SaveSession(objectAccount.get.license, session),
-        (event: Event) => event match
-          case fault @ Fault(_, _) => onFetchFault("add session", session, fault)
-          case SessionSaved(id) =>
-            observableSessions.insert(0, session.copy(id = id))
-            observableSessions.sort()
-            selectedSessionId.set(id)
-            logger.info(s"Added session: $session")
-            runLast
-          case _ => ()
-      )
+      val id = store.addSession(session)
+      observableSessions.insert(0, session.copy(id = id))
+      observableSessions.sort()
+      selectedSessionId.set(id)
+      logger.info(s"Added session: $session")
 
   def update(selectedIndex: Int, session: Session)(runLast: => Unit): Unit =
     supervised:
