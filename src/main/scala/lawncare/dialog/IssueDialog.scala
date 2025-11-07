@@ -10,7 +10,7 @@ import lawncare.{App, Context, Entity, Issue}
 final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
   initOwner(App.stage)
   title = context.windowTitle
-  headerText = context.dialogSession
+  headerText = context.dialogIssue
 
   val reportTextField = new TextField:
     text = issue.report
