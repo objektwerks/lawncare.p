@@ -9,37 +9,38 @@ final class StoreTest extends AnyFunSuite with Matchers:
   val context = Context( ConfigFactory.load("test.conf") )
   val store = Store(context)
 
-  var swimmer = Swimmer(name = "fred")
-  var session = Session(swimmerId = 0)
+  var property = Property(location = "fred")
+  var session = Session(propertyId = 0)
+  var issue = Issue(propertyId = 0)
 
   test("store"):
-    addSwimmer()
-    updateSwimmer()
-    listSwimmers()
+    addProperty()
+    updateProperty()
+    listProperties()
 
     addSession()
     updateSession()
     listSessions()
 
-  def addSwimmer(): Unit =
-    val swimmerId = store.addSwimmer(swimmer)
-    swimmerId shouldBe 1
-    swimmer = swimmer.copy(id = swimmerId)
-    session = session.copy(swimmerId = swimmerId)
+  def addProperty(): Unit =
+    val propertyId = store.addProperty(property)
+    propertyId shouldBe 1
+    property = property.copy(id = propertyId)
+    session = session.copy(propertyId = propertyId)
 
-  def updateSwimmer(): Unit =
-    swimmer = swimmer.copy(name = "fred flintstone")
-    store.updateSwimmer(swimmer)
+  def updateProperty(): Unit =
+    property = property.copy(location = "fred flintstone")
+    store.updateProperty(property)
 
-  def listSwimmers(): Unit =
-    store.listSwimmers().length shouldBe 1
+  def listProperties(): Unit =
+    store.listProperties().length shouldBe 1
 
   def addSession(): Unit =
     store.addSession(session)
 
   def updateSession(): Unit =
-    session = session.copy(laps = 30, minutes = 30)
+    session = session.copy(fertilized = true)
     store.updateSession(session)
 
   def listSessions(): Unit =
-    store.listSessions(swimmer.id).length shouldBe 1
+    store.listSessions(property.id).length shouldBe 1
