@@ -25,10 +25,6 @@ final class Context(config: Config):
   val buttonAdd = config.getString("button.add")
   val buttonEdit = config.getString("button.edit")
   val buttonSave = config.getString("button.save")
-  val buttonFaults = config.getString("button.faults")
-  val buttonRegister = config.getString("button.register")
-  val buttonLogin = config.getString("button.login")
-  val buttonAccount = config.getString("button.account")
 
   val columnYes = config.getString("column.yes")
   val columnNo = config.getString("column.no")
