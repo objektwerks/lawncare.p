@@ -97,6 +97,6 @@ final class Model(store: Store) extends LazyLogging:
       store.updateIssue(issue)
       if selectedIndex > -1 then
         observableIssues.update(selectedIndex, issue)      
-        logger.info(s"Updated issue from: $selectedIndex to: $issue")
+        logger.info(s"Updated issue: $issue")
       else
         logger.error(s"Update of issue: $issue \nfailed due to invalid index: $selectedIndex")
