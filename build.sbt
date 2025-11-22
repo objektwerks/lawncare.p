@@ -5,7 +5,7 @@ scalaVersion := "3.8.0-RC1"
 libraryDependencies ++= {
   Seq(
     "org.scalafx" %% "scalafx" % "24.0.2-R36",
-    "com.softwaremill.ox" %% "core" % "1.0.1",
+    "com.softwaremill.ox" %% "core" % "1.0.2",
     "org.scalikejdbc" %% "scalikejdbc" % "4.3.5",
     "com.zaxxer" % "HikariCP" % "7.0.2",
     "com.h2database" % "h2" % "2.4.240",
