@@ -62,4 +62,4 @@ final case class Issue(id: Long = 0,
   val issue = this
 
 object Issue:
-  given Ordering[Issue] = Ordering.by[Issue, String](issue => issue.reported).reverse
+  given sortDescByReported: Ordering[Issue] = Ordering.by[Issue, String](issue => issue.reported).reverse
