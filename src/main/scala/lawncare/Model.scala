@@ -40,7 +40,7 @@ final class Model(store: Store) extends LazyLogging:
       assertNotInFxThread(s"add property: $property")
       val id = store.addProperty(property)
       observableProperties.insert(0, property.copy(id = id))
-      observableProperties.sort()
+      observableProperties.sort(Property.sortByLocation)
       selectedPropertyId.set(id)
       logger.info(s"Added property: $property")
 
@@ -50,7 +50,7 @@ final class Model(store: Store) extends LazyLogging:
       store.updateProperty(property)
       if selectedIndex > -1 then
         observableProperties.update(selectedIndex, property)
-        observableProperties.sort()
+        observableProperties.sort(Property.sortByLocation)
         logger.info(s"Updated property: $property")
       else
         logger.error(s"Update of property: $property \nfailed due to invalid index: $selectedIndex")
