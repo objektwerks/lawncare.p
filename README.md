@@ -6,7 +6,7 @@ WARNING
 -------
 >NPM Security has changed! Here's a forum thread on the issue:
 * [NPM 2FA / OTP Issue](https://github.com/orgs/community/discussions/181802)
->Consequently, ```jDeploy publish``` fails in the ```Deploy``` section below!
+>Consequently, ```jDeploy publish``` currently fails in the ```Deploy``` section below!
 
 Install
 -------
