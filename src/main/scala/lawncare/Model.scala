@@ -40,6 +40,7 @@ final class Model(store: Store) extends LazyLogging:
       assertNotInFxThread(s"add property: $property")
       val id = store.addProperty(property)
       observableProperties.insert(0, property.copy(id = id))
+      observableProperties.sort()
       selectedPropertyId.set(id)
       logger.info(s"Added property: $property")
 
