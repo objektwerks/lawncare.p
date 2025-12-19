@@ -75,7 +75,8 @@ final class Model(store: Store) extends LazyLogging:
       assertNotInFxThread(s"update session from: $selectedIndex to: $session")
       store.updateSession(session)
       if selectedIndex > -1 then
-        observableSessions.update(selectedIndex, session)      
+        observableSessions.update(selectedIndex, session)
+        observableSessions.sort(Session.sortDescByOccured)
         logger.info(s"Updated session: $session")
       else
         logger.error(s"Update of session: $session \nfailed due to invalid index: $selectedIndex")
