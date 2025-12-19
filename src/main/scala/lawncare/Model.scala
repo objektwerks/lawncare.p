@@ -66,6 +66,7 @@ final class Model(store: Store) extends LazyLogging:
       assertNotInFxThread(s"add session: $session")
       val id = store.addSession(session)
       observableSessions.insert(0, session.copy(id = id))
+      observableSessions.sort(Session.sortDescByOccured)
       selectedSessionId.set(id)
       logger.info(s"Added session: $session")
 
