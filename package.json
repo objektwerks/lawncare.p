@@ -1,7 +1,5 @@
 {
-    "bin": {
-        "lawncare": "jdeploy-bundle/jdeploy.js"
-    },
+    "bin": {"lawncare": "jdeploy-bundle/jdeploy.js"},
     "author": "Objektwerks",
     "description": "Lawncare app.",
     "main": "index.js",
@@ -13,11 +11,21 @@
     "version": "1.0.0",
     "jdeploy": {
         "jdk": false,
+        "fallbackToUniversal": false,
+        "publishTargets": [{
+            "isDefault": true,
+            "name": "npm: lawncare",
+            "type": "NPM",
+            "url": "lawncare"
+        }],
         "javaVersion": "25",
+        "documentTypes": [],
+        "javafxVersion": "25",
         "jar": ".assembly/lawncare-1.0.0.jar",
         "javafx": true,
-        "javafxVersion": "25",
-        "title": "Lawncare"
+        "title": "Lawncare",
+        "downloadPage": {"platforms": ["default"]},
+        "platformBundlesEnabled": false
     },
     "dependencies": {
         "command-exists-promise": "^2.0.2",
@@ -28,11 +36,7 @@
     },
     "license": "Apache 2.0",
     "name": "lawncare",
-    "files": [
-        "jdeploy-bundle"
-    ],
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+    "files": ["jdeploy-bundle"],
+    "scripts": {"test": "echo \"Error: no test specified\" && exit 1"},
     "homepage": "https://github.com/objektwerks/lawncare.p"
 }
