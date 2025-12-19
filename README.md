@@ -2,6 +2,11 @@ Lawncare [ Personal Edition ]
 -----------------------------
 Lawn care app using ScalaFx, ScalikeJdbc, Ox, H2, HikariCP and Scala 3.
 
+WARNING
+-------
+>NPM Security has changed! Here's a forum thread on the debacle:
+* [NPM 2FA / OTP Debacle](https://github.com/orgs/community/discussions/181802)
+
 Install
 -------
 1. Select [Lawncare](https://www.jdeploy.com/~lawncare)
