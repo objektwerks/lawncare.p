@@ -101,7 +101,8 @@ final class Model(store: Store) extends LazyLogging:
       assertNotInFxThread(s"update issue from: $selectedIndex to: $issue")
       store.updateIssue(issue)
       if selectedIndex > -1 then
-        observableIssues.update(selectedIndex, issue)      
+        observableIssues.update(selectedIndex, issue)
+        observableIssues.sort(Issue.sortDescByReported)
         logger.info(s"Updated issue: $issue")
       else
         logger.error(s"Update of issue: $issue \nfailed due to invalid index: $selectedIndex")
