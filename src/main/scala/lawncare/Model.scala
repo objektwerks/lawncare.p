@@ -50,6 +50,7 @@ final class Model(store: Store) extends LazyLogging:
       store.updateProperty(property)
       if selectedIndex > -1 then
         observableProperties.update(selectedIndex, property)
+        observableProperties.sort()
         logger.info(s"Updated property: $property")
       else
         logger.error(s"Update of property: $property \nfailed due to invalid index: $selectedIndex")
