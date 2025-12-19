@@ -10,7 +10,7 @@
         "type": "git",
         "url": "git+https://github.com/objektwerks/lawncare.p.git"
     },
-    "version": "16.0.0",
+    "version": "1.0.0",
     "jdeploy": {
         "jdk": false,
         "javaVersion": "25",
