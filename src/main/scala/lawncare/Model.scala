@@ -92,6 +92,7 @@ final class Model(store: Store) extends LazyLogging:
       assertNotInFxThread(s"add issue: $issue")
       val id = store.addIssue(issue)
       observableIssues.insert(0, issue.copy(id = id))
+      observableIssues.sort(Issue.sortDescByReported)
       selectedIssueId.set(id)
       logger.info(s"Added issue: $issue")
 
