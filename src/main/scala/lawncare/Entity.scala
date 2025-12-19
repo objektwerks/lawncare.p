@@ -47,7 +47,7 @@ final case class Session(id: Long = 0,
   val session = this
 
 object Session:
-  given Ordering[Session] = Ordering.by[Session, String](session => session.occurred).reverse
+  given sortDescByOccured: Ordering[Session] = Ordering.by[Session, String](session => session.occurred).reverse
 
 final case class Issue(id: Long = 0,
                        propertyId: Long,
