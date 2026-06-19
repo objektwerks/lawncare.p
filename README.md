@@ -32,7 +32,7 @@ Session
 * blowed ( blower, driveway, plant beds )
 * fertilized ( nitrogen, phosphorus and potassium )
 * pesticided ( herbicides, insecticides, nematicides, fungicides )
-* weeded ( plant beds )e
+* weeded ( plant beds )
 * watered ( sprinkler system, sprinkler heads and pipes )
 * repaired ( sprinkler system, pipes, heads, on/off | uncapped/capped )
 * note ( anyting pertaining to a yard session )
