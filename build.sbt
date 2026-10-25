@@ -1,7 +1,7 @@
 name := "lawncare.p"
 organization := "objektwerks"
 version := "1.0.0"
-scalaVersion := "3.9.0"
+scalaVersion := "3.10.0"
 libraryDependencies ++= {
   Seq(
     "org.scalafx" %% "scalafx" % "27.0.0-R39",
